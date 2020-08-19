@@ -1,5 +1,5 @@
 # Backdoorplz
-Adds a user "LegitAdmin" with password "Backdoor123" to the local admin group. <br>
+Adds a user "LegitAdmin" with password "Backdoor123!" to the local admin group. <br>
 DLL and EXE, both x86 and x64 work fine.<br>
 no precompiled headers<br>
 
